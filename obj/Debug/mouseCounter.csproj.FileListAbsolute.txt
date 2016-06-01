@@ -1,7 +1,6 @@
 c:\users\ringo hoffmann\documents\visual studio 2015\Projects\mouseCounter\mouseCounter\bin\Debug\mouseCounter.exe.config
 c:\users\ringo hoffmann\documents\visual studio 2015\Projects\mouseCounter\mouseCounter\bin\Debug\mouseCounter.exe
 c:\users\ringo hoffmann\documents\visual studio 2015\Projects\mouseCounter\mouseCounter\bin\Debug\mouseCounter.pdb
-c:\users\ringo hoffmann\documents\visual studio 2015\Projects\mouseCounter\mouseCounter\obj\Debug\mouseCounter.csprojResolveAssemblyReference.cache
 c:\users\ringo hoffmann\documents\visual studio 2015\Projects\mouseCounter\mouseCounter\obj\Debug\mouseCounter.fMain.resources
 c:\users\ringo hoffmann\documents\visual studio 2015\Projects\mouseCounter\mouseCounter\obj\Debug\mouseCounter.Properties.Resources.resources
 c:\users\ringo hoffmann\documents\visual studio 2015\Projects\mouseCounter\mouseCounter\obj\Debug\mouseCounter.csproj.GenerateResource.Cache

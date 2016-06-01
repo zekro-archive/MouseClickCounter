@@ -14,12 +14,8 @@ namespace mouseCounter
         public fInfo()
         {
             InitializeComponent();
-            this.Text = String.Format("Info über {0}", AssemblyTitle);
-            this.labelProductName.Text = AssemblyProduct;
-            this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
-            this.labelCopyright.Text = AssemblyCopyright;
-            this.labelCompanyName.Text = AssemblyCompany;
-            this.textBoxDescription.Text = AssemblyDescription;
+            this.Text = String.Format("Information");
+            this.lbVersion.Text = "Client version: " + AssemblyVersion;
         }
 
         #region Assemblyattributaccessoren
@@ -105,6 +101,31 @@ namespace mouseCounter
         private void fInfo_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void start(string path)
+        {
+            System.Diagnostics.Process.Start(path);
+        }
+
+        private void llbGithub_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            start("http://github.com/zekrotja");
+        }
+
+        private void llbWebsite_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            start("http://zekro.jimdo.com");
+        }
+
+        private void llbYouTube_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            start("https://www.youtube.com/c/zekrommaster110");
+        }
+
+        private void llbTwitter_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            start("https://twitter.com/zekrotja");
         }
     }
 }

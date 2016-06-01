@@ -1,4 +1,5 @@
-﻿using mouseCounter.Properties;
+﻿using Microsoft.Win32;
+using mouseCounter.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,6 +29,7 @@ namespace mouseCounter
             nudLeftValue.Value = Settings.Default.leftMouseCounter;
             nudRightValue.Value = Settings.Default.rightMouseCounter;
 
+            cbUpdateNotify.Checked = Settings.Default.testForUpdate;
             cbAutoStart.Checked = Settings.Default.autoStart;
         }
 
@@ -58,38 +60,32 @@ namespace mouseCounter
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Settings.Default.testForUpdate = cbUpdateNotify.Checked;
             Settings.Default.Save();
 
+            
             if (Settings.Default.autoStart && autoStartChanged)
             {
-                StreamWriter sw = new StreamWriter("autostart_create.bat");
-                sw.WriteLine("copy " + AppDomain.CurrentDomain.FriendlyName + " \"%appdata%/Microsoft/Windows/Start Menu/Programs/Startup\" /y");
-                sw.WriteLine("del autostart_create.bat");
-                sw.Close();
-                System.Diagnostics.Process.Start("autostart_create.bat");
+                
+                RegistryKey autostart = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
+                autostart.SetValue("CAutoStart", Application.ExecutablePath.ToString());
+                autostart.Close();
 
             } else if (!Settings.Default.autoStart && autoStartChanged)
             {
-                StreamWriter sw = new StreamWriter("autostart_delete.bat");
-                sw.WriteLine(@"cd %appdata%\Microsoft\Windows\Start Menu\Programs\Startup\");
-                sw.WriteLine("del " + AppDomain.CurrentDomain.FriendlyName);
-                sw.WriteLine(@"cd " + Application.StartupPath.ToString());
-                sw.WriteLine("del autostart_delete.bat");
-                sw.Close();
-                System.Diagnostics.Process.Start("autostart_delete.bat");
+                
+                RegistryKey autostart = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
+                autostart.SetValue("CAutoStart", 0);
+                autostart.Close();
             }
-
+            
             this.Close();
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbAutoStart.Checked)
-                Settings.Default.autoStart = true;
-            else
-                Settings.Default.autoStart = false;
-
             autoStartChanged = true;
+            Settings.Default.autoStart = cbAutoStart.Checked;
         }
     }
 }

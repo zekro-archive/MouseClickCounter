@@ -23,7 +23,7 @@ namespace mouseCounter
 
         private void fMain_Load(object sender, EventArgs e)
         {
-            cUpdate.update();
+            if (Settings.Default.testForUpdate) cUpdate.update();
 
             timer.Start();
             cMouseHookLEFT.Start();
@@ -60,7 +60,8 @@ namespace mouseCounter
 
         private void openHelp(object sender, EventArgs e)
         {
-
+            fInfo info = new fInfo();
+            info.ShowDialog();
         }
 
         private void button1_Click(object sender, EventArgs e)
