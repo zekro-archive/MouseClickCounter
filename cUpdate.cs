@@ -32,7 +32,7 @@ namespace mouseCounter
 
         public static void update()
         {
-            if (/*Settings.Default.testForUpdate && */getUpdateStatus(VERSION, getOnelineFile(versionFileURL)))
+            if (getUpdateStatus(VERSION, getOnelineFile(versionFileURL)))
             {
                 var msgbox = MessageBox.Show("A update is available! \n\nClient version: " + VERSION + "\nLatest version: " + getOnelineFile(versionFileURL) + "\n\nDo you want to downlaod the lates version now?", 
                                              "Update available",
@@ -40,6 +40,11 @@ namespace mouseCounter
 
                 if (msgbox == DialogResult.Yes)
                 {
+                    cXMLdataSet set = new cXMLdataSet();
+                    set.leftMouseCounter = Settings.Default.leftMouseCounter.ToString();
+                    set.rightMouseCounter = Settings.Default.rightMouseCounter.ToString();
+                    cXMLSerializer.writeXML(set, "_update_data.xml");
+
                     WebClient client = new WebClient();
                     client.DownloadFile(getOnelineFile(downloadFileURL), "mouseCounterUpdate.exe");
 

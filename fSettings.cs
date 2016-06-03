@@ -10,8 +10,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Xml.Serialization;
 using static mouseCounter.cConst;
+using static mouseCounter.cXMLSerializer;
 
 namespace mouseCounter
 {
@@ -86,6 +87,36 @@ namespace mouseCounter
         {
             autoStartChanged = true;
             Settings.Default.autoStart = cbAutoStart.Checked;
+        }
+
+        private void btInport_Click(object sender, EventArgs e)
+        {
+            openFileDialog.ShowDialog();
+
+            XmlSerializer ser = new XmlSerializer(typeof(cXMLdataSet));
+            FileStream read = new FileStream(openFileDialog.FileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+            cXMLdataSet set = (cXMLdataSet)ser.Deserialize(read);
+
+            nudLeftValue.Value = Convert.ToDecimal(set.leftMouseCounter);
+            nudRightValue.Value = Convert.ToDecimal(set.rightMouseCounter);
+
+        }
+
+        private void btExport_Click(object sender, EventArgs e)
+        {
+            saveFileDialog.ShowDialog();
+            try
+            {
+                cXMLdataSet set = new cXMLdataSet();
+                set.leftMouseCounter = Settings.Default.leftMouseCounter.ToString();
+                set.rightMouseCounter = Settings.Default.rightMouseCounter.ToString();
+                writeXML(set, saveFileDialog.FileName);
+                MessageBox.Show("File saved in \"" + saveFileDialog.FileName + "\"!", "File saved.", MessageBoxButtons.OK);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            } 
         }
     }
 }

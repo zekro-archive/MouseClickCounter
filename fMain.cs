@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Xml.Serialization;
 using static mouseCounter.cConst;
 
 namespace mouseCounter
@@ -35,6 +35,16 @@ namespace mouseCounter
             cm.MenuItems.Add("Settings", new EventHandler(openSettings));
             cm.MenuItems.Add("Help", new EventHandler(openHelp));
             this.ContextMenu = cm;
+
+            if (File.Exists("_update_data.xml"))
+            {
+                XmlSerializer ser = new XmlSerializer(typeof(cXMLdataSet));
+                FileStream read = new FileStream("_update_data.xml", FileMode.Open, FileAccess.Read, FileShare.Read);
+                cXMLdataSet set = (cXMLdataSet)ser.Deserialize(read);
+
+                Settings.Default.rightMouseCounter = Convert.ToInt32(set.rightMouseCounter);
+                Settings.Default.leftMouseCounter = Convert.ToInt32(set.leftMouseCounter);
+            }
 
             lbRightCounter.Text = lableRightCounter + Settings.Default.rightMouseCounter;
             lbLeftCounter.Text = lableLeftCounter + Settings.Default.leftMouseCounter;

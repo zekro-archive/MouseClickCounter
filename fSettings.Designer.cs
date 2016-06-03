@@ -48,6 +48,10 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.cbAutoStart = new System.Windows.Forms.CheckBox();
             this.cbUpdateNotify = new System.Windows.Forms.CheckBox();
+            this.btExport = new System.Windows.Forms.Button();
+            this.btInport = new System.Windows.Forms.Button();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudLeftValue)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -281,12 +285,47 @@
             this.cbUpdateNotify.Text = "Notify if update is available";
             this.cbUpdateNotify.UseVisualStyleBackColor = true;
             // 
+            // btExport
+            // 
+            this.btExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btExport.ForeColor = System.Drawing.Color.White;
+            this.btExport.Location = new System.Drawing.Point(13, 280);
+            this.btExport.Name = "btExport";
+            this.btExport.Size = new System.Drawing.Size(88, 23);
+            this.btExport.TabIndex = 8;
+            this.btExport.Text = "Export data...";
+            this.btExport.UseVisualStyleBackColor = true;
+            this.btExport.Click += new System.EventHandler(this.btExport_Click);
+            // 
+            // btInport
+            // 
+            this.btInport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btInport.ForeColor = System.Drawing.Color.White;
+            this.btInport.Location = new System.Drawing.Point(107, 280);
+            this.btInport.Name = "btInport";
+            this.btInport.Size = new System.Drawing.Size(88, 23);
+            this.btInport.TabIndex = 9;
+            this.btInport.Text = "Import data...";
+            this.btInport.UseVisualStyleBackColor = true;
+            this.btInport.Click += new System.EventHandler(this.btInport_Click);
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.Filter = "XML-Dateien|*.xml";
+            this.saveFileDialog.Title = "Choose path to export as XML-File.";
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.Filter = "XML-Dateien|*.xml";
+            // 
             // fSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
             this.ClientSize = new System.Drawing.Size(331, 315);
+            this.Controls.Add(this.btInport);
+            this.Controls.Add(this.btExport);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.button1);
@@ -333,5 +372,9 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.CheckBox cbUpdateNotify;
         private System.Windows.Forms.CheckBox cbAutoStart;
+        private System.Windows.Forms.Button btExport;
+        private System.Windows.Forms.Button btInport;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }
